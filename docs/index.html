@@ -7,12 +7,36 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Clicker Game</h1>
-    <button id="clicker-button">Click Me!</button>
-    <p>Total Clicks: <span id="clicks">0</span></p>
-    <br>
-    <button id="autoclicker-toggle">Start Auto-Clicker</button>
-    
+    <div class="container">
+        <header>
+            <h1>Ultimate Clicker Game</h1>
+            <p class="tagline">Click and earn! Buy upgrades to grow faster.</p>
+        </header>
+
+        <main>
+            <section class="game">
+                <div class="click-section">
+                    <button id="clicker-button" class="click-button">Click Me!</button>
+                    <p>Total Clicks: <span id="clicks">0</span></p>
+                </div>
+
+                <div class="upgrade-section">
+                    <h3>Upgrades</h3>
+                    <button id="upgrade-click" class="upgrade-button">Upgrade Click (Cost: 10)</button>
+                    <button id="upgrade-auto" class="upgrade-button">Upgrade Auto-Clicker (Cost: 50)</button>
+                </div>
+                
+                <div class="autoclicker-section">
+                    <button id="autoclicker-toggle" class="autoclicker-button">Start Auto-Clicker</button>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Clicker Game | Created with ❤️</p>
+        </footer>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

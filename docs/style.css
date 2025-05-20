@@ -1,0 +1,115 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 20px;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+header {
+    margin-bottom: 40px;
+}
+
+h1 {
+    font-size: 36px;
+    color: #2c3e50;
+}
+
+.tagline {
+    font-size: 18px;
+    color: #7f8c8d;
+    margin-top: 10px;
+}
+
+.game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.click-section {
+    margin-bottom: 20px;
+}
+
+.click-button {
+    background-color: #3498db;
+    color: white;
+    font-size: 24px;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.click-button:hover {
+    background-color: #2980b9;
+    transform: scale(1.1);
+}
+
+.upgrade-section {
+    margin: 20px 0;
+}
+
+.upgrade-button {
+    background-color: #2ecc71;
+    color: white;
+    font-size: 18px;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.upgrade-button:hover {
+    background-color: #27ae60;
+    transform: scale(1.05);
+}
+
+.autoclicker-section {
+    margin-top: 40px;
+}
+
+.autoclicker-button {
+    background-color: #f39c12;
+    color: white;
+    font-size: 20px;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.autoclicker-button:hover {
+    background-color: #e67e22;
+    transform: scale(1.05);
+}
+
+footer {
+    margin-top: 40px;
+    color: #7f8c8d;
+    font-size: 14px;
+}

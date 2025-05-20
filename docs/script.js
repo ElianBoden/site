@@ -1,26 +1,51 @@
 let clickCount = 0;
-let autoClickerInterval = null; // Stores the interval for auto-clicker
-let isAutoClicking = false; // Tracks whether the auto-clicker is active
+let autoClickerInterval = null;
+let isAutoClicking = false;
+let clickValue = 1;
+let autoClickSpeed = 1000; // Default auto-click speed
+let upgradeClickCost = 10;
+let upgradeAutoCost = 50;
 
-// Handle regular button click
 document.getElementById('clicker-button').onclick = function() {
-    clickCount++;
+    clickCount += clickValue;
     document.getElementById('clicks').textContent = clickCount;
 };
 
-// Handle auto-clicker toggle button
+// Auto-clicker toggle button
 document.getElementById('autoclicker-toggle').onclick = function() {
     if (isAutoClicking) {
-        // Stop the auto-clicker
         clearInterval(autoClickerInterval);
         document.getElementById('autoclicker-toggle').textContent = "Start Auto-Clicker";
     } else {
-        // Start the auto-clicker
         autoClickerInterval = setInterval(() => {
-            clickCount++;
+            clickCount += clickValue;
             document.getElementById('clicks').textContent = clickCount;
-        }, 1000); // 1000ms = 1 second
+        }, autoClickSpeed);
         document.getElementById('autoclicker-toggle').textContent = "Stop Auto-Clicker";
     }
-    isAutoClicking = !isAutoClicking; // Toggle the state
+    isAutoClicking = !isAutoClicking;
+};
+
+// Upgrade click value
+document.getElementById('upgrade-click').onclick = function() {
+    if (clickCount >= upgradeClickCost) {
+        clickCount -= upgradeClickCost;
+        clickValue++;
+        upgradeClickCost = Math.floor(upgradeClickCost * 1.5); // Increase upgrade cost
+        document.getElementById('clicks').textContent = clickCount;
+        document.getElementById('upgrade-click').textContent = `Upgrade Click (Cost: ${upgradeClickCost})`;
+    }
+};
+
+// Upgrade auto-clicker speed
+document.getElementById('upgrade-auto').onclick = function() {
+    if (clickCount >= upgradeAutoCost) {
+        clickCount -= upgradeAutoCost;
+        if (autoClickSpeed > 200) { // Don't make auto-clicker too fast
+            autoClickSpeed -= 200; // Decrease the interval for faster auto-clicking
+        }
+        upgradeAutoCost = Math.floor(upgradeAutoCost * 1.5); // Increase upgrade cost
+        document.getElementById('clicks').textContent = clickCount;
+        document.getElementById('upgrade-auto').textContent = `Upgrade Auto-Clicker (Cost: ${upgradeAutoCost})`;
+    }
 };
