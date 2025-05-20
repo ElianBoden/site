@@ -1,14 +1,18 @@
-let clickCount = 0;
-let autoClickerInterval = null;
+// Retrieve saved stats from localStorage, or use default values if not found
+let clickCount = parseInt(localStorage.getItem('clickCount')) || 0;
+let clickValue = parseInt(localStorage.getItem('clickValue')) || 1;
+let autoClickSpeed = parseInt(localStorage.getItem('autoClickSpeed')) || 1000;
+let upgradeClickCost = parseInt(localStorage.getItem('upgradeClickCost')) || 10;
+let upgradeAutoCost = parseInt(localStorage.getItem('upgradeAutoCost')) || 50;
 let isAutoClicking = false;
-let clickValue = 1;
-let autoClickSpeed = 1000; // Default auto-click speed
-let upgradeClickCost = 10;
-let upgradeAutoCost = 50;
+let autoClickerInterval = null;
+
+// Display current stats on page load
+document.getElementById('clicks').textContent = clickCount;
 
 document.getElementById('clicker-button').onclick = function() {
     clickCount += clickValue;
-    document.getElementById('clicks').textContent = clickCount;
+    updateStats();
 };
 
 // Auto-clicker toggle button
@@ -19,7 +23,7 @@ document.getElementById('autoclicker-toggle').onclick = function() {
     } else {
         autoClickerInterval = setInterval(() => {
             clickCount += clickValue;
-            document.getElementById('clicks').textContent = clickCount;
+            updateStats();
         }, autoClickSpeed);
         document.getElementById('autoclicker-toggle').textContent = "Stop Auto-Clicker";
     }
@@ -32,7 +36,7 @@ document.getElementById('upgrade-click').onclick = function() {
         clickCount -= upgradeClickCost;
         clickValue++;
         upgradeClickCost = Math.floor(upgradeClickCost * 1.5); // Increase upgrade cost
-        document.getElementById('clicks').textContent = clickCount;
+        updateStats();
         document.getElementById('upgrade-click').textContent = `Upgrade Click (Cost: ${upgradeClickCost})`;
     }
 };
@@ -45,7 +49,20 @@ document.getElementById('upgrade-auto').onclick = function() {
             autoClickSpeed -= 200; // Decrease the interval for faster auto-clicking
         }
         upgradeAutoCost = Math.floor(upgradeAutoCost * 1.5); // Increase upgrade cost
-        document.getElementById('clicks').textContent = clickCount;
+        updateStats();
         document.getElementById('upgrade-auto').textContent = `Upgrade Auto-Clicker (Cost: ${upgradeAutoCost})`;
     }
 };
+
+// Update stats in localStorage and on the page
+function updateStats() {
+    // Save the updated stats to localStorage
+    localStorage.setItem('clickCount', clickCount);
+    localStorage.setItem('clickValue', clickValue);
+    localStorage.setItem('autoClickSpeed', autoClickSpeed);
+    localStorage.setItem('upgradeClickCost', upgradeClickCost);
+    localStorage.setItem('upgradeAutoCost', upgradeAutoCost);
+    
+    // Update the stats on the page
+    document.getElementById('clicks').textContent = clickCount;
+}
