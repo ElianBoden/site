@@ -1,42 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clicker Game</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Crazy Animations Website</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Ultimate Clicker Game</h1>
-            <p class="tagline">Click and earn! Buy upgrades to grow faster.</p>
-        </header>
+  <header>
+    <h1 class="title">Welcome to My Crazy Website!</h1>
+    <p class="subheading">Experience some insane animations</p>
+  </header>
+  
+  <section class="animated-section">
+    <div class="box" id="box1"></div>
+    <div class="box" id="box2"></div>
+    <div class="box" id="box3"></div>
+  </section>
 
-        <main>
-            <section class="game">
-                <div class="click-section">
-                    <button id="clicker-button" class="click-button">Click Me!</button>
-                    <p>Total Clicks: <span id="clicks">0</span></p>
-                </div>
+  <section class="interactive-section">
+    <button class="action-btn" id="animateButton">Click Me for Animation!</button>
+    <div class="circle" id="circle"></div>
+  </section>
+  
+  <footer>
+    <p>Made with love and code.</p>
+  </footer>
 
-                <div class="upgrade-section">
-                    <h3>Upgrades</h3>
-                    <button id="upgrade-click" class="upgrade-button">Upgrade Click (Cost: 10)</button>
-                    <button id="upgrade-auto" class="upgrade-button">Upgrade Auto-Clicker (Cost: 50)</button>
-                </div>
-                
-                <div class="autoclicker-section">
-                    <button id="autoclicker-toggle" class="autoclicker-button">Start Auto-Clicker</button>
-                </div>
-            </section>
-        </main>
-
-        <footer>
-            <p>&copy; 2025 Clicker Game | Created with ❤️</p>
-        </footer>
-    </div>
-
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
