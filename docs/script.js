@@ -1,1 +1,2 @@
-console.log("🌈 Elian's crazy site is alive and bouncing!");
+document.getElementById('year').textContent = new Date().getFullYear();
+console.log("Welcome to Elian's cleaner and cooler site 🚀");
