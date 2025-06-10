@@ -17,6 +17,7 @@ body {
     flex-direction: column;
     align-items: center;
     position: relative;
+    overflow-x: hidden; /* Prevent horizontal scroll for animations */
 }
 
 .background {
@@ -27,8 +28,58 @@ body {
     height: 100%;
     background: radial-gradient(circle at top, #2e2f3e 0%, #0e0e10 100%);
     z-index: -1;
-    animation: pulse 10s infinite alternate;
+    animation: backgroundPan 30s linear infinite alternate; /* Slower, smoother pan */
 }
+
+/* New: Floating elements for background visual interest */
+.floating-element {
+    position: absolute;
+    background: rgba(0, 198, 255, 0.1); /* Light blue, slightly transparent */
+    border-radius: 50%;
+    animation: float 15s infinite ease-in-out alternate;
+    filter: blur(15px); /* Soft blur for a dreamy effect */
+    z-index: -1;
+}
+
+.floating-element:nth-child(1) {
+    width: 80px;
+    height: 80px;
+    top: 10%;
+    left: 15%;
+    animation-duration: 18s;
+    background: rgba(0, 114, 255, 0.15); /* Slightly darker blue */
+}
+
+.floating-element:nth-child(2) {
+    width: 120px;
+    height: 120px;
+    top: 50%;
+    left: 80%;
+    animation-duration: 20s;
+    animation-delay: 2s;
+    background: rgba(0, 198, 255, 0.1);
+}
+
+.floating-element:nth-child(3) {
+    width: 60px;
+    height: 60px;
+    top: 70%;
+    left: 30%;
+    animation-duration: 16s;
+    animation-delay: 1s;
+    background: rgba(0, 114, 255, 0.12);
+}
+
+.floating-element:nth-child(4) {
+    width: 100px;
+    height: 100px;
+    top: 25%;
+    left: 60%;
+    animation-duration: 22s;
+    animation-delay: 3s;
+    background: rgba(0, 198, 255, 0.08);
+}
+
 
 header {
     text-align: center;
@@ -41,7 +92,7 @@ header {
     background: linear-gradient(90deg, #00c6ff, #0072ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: fadeIn 1s ease forwards;
+    animation: fadeIn 1s ease forwards, glow 2s infinite alternate; /* Added glow */
 }
 
 .subtitle {
@@ -65,11 +116,21 @@ main {
     border-radius: 12px;
     padding: 1.5rem;
     backdrop-filter: blur(10px);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: slideIn 1s ease forwards; /* Added slide in */
 }
 
 .card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-5px) scale(1.01); /* Slight scale on hover */
+    box-shadow: 0 0 20px rgba(0, 198, 255, 0.4); /* Glow on hover */
+}
+
+.card:nth-child(odd) {
+    animation-delay: 0.2s; /* Stagger animation for cards */
+}
+
+.card:nth-child(even) {
+    animation-delay: 0.4s;
 }
 
 h2 {
@@ -101,7 +162,25 @@ footer {
     to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes pulse {
-    from { background-position: 0% 0%; }
-    to { background-position: 100% 100%; }
+@keyframes backgroundPan {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 5px #00c6ff, 0 0 10px #00c6ff; }
+    to { text-shadow: 0 0 10px #0072ff, 0 0 20px #0072ff; }
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes float {
+    0% { transform: translate(0, 0) rotate(0deg); opacity: 0.7; }
+    25% { transform: translate(20px, 10px) rotate(5deg); opacity: 0.8; }
+    50% { transform: translate(0, -20px) rotate(0deg); opacity: 0.9; }
+    75% { transform: translate(-20px, 10px) rotate(-5deg); opacity: 0.8; }
+    100% { transform: translate(0, 0) rotate(0deg); opacity: 0.7; }
 }
