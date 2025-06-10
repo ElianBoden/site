@@ -18,7 +18,26 @@ body {
     align-items: center;
     position: relative;
     overflow-x: hidden; /* Prevent horizontal scroll for animations */
+    cursor: none; /* Hide default cursor for custom mouse trail */
 }
+
+/* Mouse Trail */
+.mouse-trail {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle, rgba(0, 198, 255, 0.7) 0%, rgba(0, 114, 255, 0) 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%); /* Center the trail on cursor */
+    pointer-events: none; /* Allows clicks to pass through */
+    z-index: 9999; /* Ensure it's on top */
+    filter: blur(8px); /* Soft glow effect */
+    opacity: 0; /* Hidden by default, shown by JS on mousemove */
+    transition: transform 0.05s ease-out, opacity 0.3s ease-out; /* Smooth follow and fade */
+}
+
 
 .background {
     position: fixed;
@@ -112,23 +131,39 @@ main {
 }
 
 .card {
+    position: relative; /* Needed for pseudo-element positioning */
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     padding: 1.5rem;
     backdrop-filter: blur(10px);
-    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease; /* Adjusted transition for 3D */
-    animation: slideIn 1s ease forwards; /* Added slide in */
-    transform-style: preserve-3d; /* Preserve 3D for children transformations */
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease;
+    animation: slideIn 1s ease forwards;
+    transform-style: preserve-3d;
+    overflow: hidden; /* Hide animated border overflow */
 }
 
+/* Animated Border for Cards */
+.card::before {
+    content: '';
+    position: absolute;
+    inset: -3px; /* Slightly larger than the card */
+    border-radius: 14px; /* Slightly larger border-radius */
+    background: linear-gradient(45deg, #00c6ff, #0072ff, #a100ff, #ff007a); /* Multi-color gradient */
+    background-size: 400% 400%; /* Make gradient larger than element for movement */
+    z-index: -1;
+    animation: borderGradient 8s linear infinite;
+    opacity: 0.7; /* Make it slightly transparent */
+}
+
+
 .card:hover {
-    transform: translateY(-5px) rotateY(5deg) scale(1.01); /* Subtle rotation on hover */
-    box-shadow: 0 0 20px rgba(0, 198, 255, 0.4); /* Glow on hover */
+    transform: translateY(-5px) rotateY(5deg) scale(1.01);
+    box-shadow: 0 0 20px rgba(0, 198, 255, 0.4);
 }
 
 .card:nth-child(odd) {
-    animation-delay: 0.2s; /* Stagger animation for cards */
+    animation-delay: 0.2s;
 }
 
 .card:nth-child(even) {
@@ -150,6 +185,16 @@ p, li {
 ul {
     padding-left: 1.2rem;
 }
+
+/* Flicker effect for emojis */
+.flicker-emoji {
+    animation: flicker 1.5s steps(10) infinite; /* Fast, stepped animation */
+    display: inline-block; /* Allows transform on inline element */
+    transform-origin: center;
+}
+.flicker-emoji:nth-child(2) { animation-delay: 0.1s; }
+.flicker-emoji:nth-child(3) { animation-delay: 0.2s; }
+
 
 footer {
     margin-top: 3rem;
@@ -187,9 +232,33 @@ footer {
     100% { transform: translate(0, 0) rotate(0deg); opacity: 0.7; }
 }
 
-/* New: Constant Floating Text Animation */
 @keyframes textFloat {
     0% { transform: translateY(0); }
-    50% { transform: translateY(-5px); } /* Moves text up slightly */
+    50% { transform: translateY(-5px); }
     100% { transform: translateY(0); }
+}
+
+/* New: Animated Border Gradient */
+@keyframes borderGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* New: Flicker Effect */
+@keyframes flicker {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    5% { opacity: 0.5; transform: scale(0.9); }
+    10% { opacity: 1; transform: scale(1); }
+    15% { opacity: 0.7; transform: scale(0.95); }
+    20% { opacity: 1; transform: scale(1); }
+    25% { opacity: 0.8; transform: scale(0.92); }
+    30% { opacity: 1; transform: scale(1); }
+    /* More steps for a more random flicker */
+    40% { opacity: 0.6; transform: scale(0.98); }
+    50% { opacity: 1; transform: scale(1); }
+    60% { opacity: 0.9; transform: scale(0.96); }
+    70% { opacity: 1; transform: scale(1); }
+    80% { opacity: 0.5; transform: scale(0.93); }
+    90% { opacity: 1; transform: scale(1); }
 }
